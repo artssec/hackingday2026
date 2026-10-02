@@ -24,11 +24,11 @@ expuesto fuera de `127.0.0.1`.
 ```
 Internet -----X (nada expuesto salvo 127.0.0.1)
 
-┌─────────────────────────── labnet (red docker) ───────────────────────────┐
-│                                                                             │
+┌─────────────────────────── labnet (red docker) ────────────────────────────┐
+│                                                                            │
 │  wazuh-target (ssh cred. débil +  →  wazuh.manager  →  wazuh.indexer       │
-│  nginx con .env expuesto, ambos                                           │
-│  a propósito)                                                             │
+│  nginx con .env expuesto, ambos                                            │
+│  a propósito)                                                              │
 │                                            │                 ↑             │
 │                                            │          wazuh.dashboard      │
 │                                            │           (https://localhost) │
@@ -37,7 +37,7 @@ Internet -----X (nada expuesto salvo 127.0.0.1)
 │                                    cron cada 15' → lee indexer             │
 │                                    → MiniMax M3 (OpenCode Go)              │
 │                                    → Telegram                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────────────────┘
 ```
 
 - **wazuh.manager / wazuh.indexer / wazuh.dashboard** — stack oficial de Wazuh

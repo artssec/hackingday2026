@@ -86,7 +86,7 @@ target/                   contenedor atacable (sshd + nginx + agente de Wazuh)
 ### Linux (Ubuntu/Debian)
 
 ```bash
-sudo apt install git curl openssl perl acl nmap hydra
+sudo apt install git curl openssl perl nmap hydra
 sudo apt install docker-compose-v2 docker.io   # o Docker Engine desde docs.docker.com
 ```
 

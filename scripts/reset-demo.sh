@@ -18,7 +18,7 @@ else
 fi
 
 step "Reseteando el checkpoint de Hermes"
-rm -f hermes/data/wazuh-last-check.json
+dc exec -T gateway-core rm -f /opt/data/wazuh-last-check.json
 info "wazuh-last-check.json eliminado (la próxima corrida del cron parte de cero)"
 
 step "Limpiando logs crudos del target (auth.log, nginx-access.log)"

@@ -51,6 +51,14 @@ fill_if_empty() {
     info "Generado $key"
   fi
 }
+# Fija KEY=valor en .env (la agrega si no existe)
+set_env() {
+  if grep -Eq "^$1=" .env; then
+    K="$1" V="$2" perl -pi -e 's/^\Q$ENV{K}\E=.*/$ENV{K}=$ENV{V}/' .env
+  else
+    printf '%s=%s\n' "$1" "$2" >> .env
+  fi
+}
 fill_if_empty DASHBOARD_PASSWORD "$(openssl rand -hex 12)"
 fill_if_empty DASHBOARD_SECRET   "$(openssl rand -hex 24)"
 fill_if_empty API_SERVER_KEY     "$(openssl rand -hex 24)"
@@ -163,6 +171,14 @@ fi
 step "7/7 Estado de Hermes (./hermes/data)"
 mkdir -p hermes/data/scripts hermes/home hermes/local-share
 
+# En Linux el contenedor corre con tu mismo UID/GID, así los archivos de
+# hermes/data son tuyos y podés editarlos y borrarlos
+if [ "$OS" = "Linux" ] && [ "$(id -u)" != "0" ]; then
+  $FS_SUDO chown -R "$(id -u):$(id -g)" hermes/data hermes/home hermes/local-share
+  set_env HERMES_UID "$(id -u)"
+  set_env HERMES_GID "$(id -g)"
+fi
+
 # Se copian (no symlink): Hermes no sigue symlinks fuera de su carpeta de scripts
 cp hermes/scripts/check-wazuh-alerts.py hermes/data/scripts/check-wazuh-alerts.py
 cp hermes/scripts/wazuh-query.py hermes/data/scripts/wazuh-query.py
@@ -178,20 +194,6 @@ info "Skill soc-siem-triage copiada a hermes/data/skills/"
 if [ ! -f hermes/data/config.yaml ]; then
   cp hermes/templates/config.yaml hermes/data/config.yaml
   info "Creado hermes/data/config.yaml (opencode-go / minimax-m3)"
-fi
-
-# Permisos en Linux: el contenedor corre con UID 10000
-if [ "$OS" = "Linux" ]; then
-  if command -v setfacl >/dev/null 2>&1; then
-    for d in hermes/data hermes/home hermes/local-share; do
-      $FS_SUDO setfacl -R -m "u:10000:rwX,u:$(id -u):rwX" "$d"
-      $FS_SUDO setfacl -R -d -m "u:10000:rwX,u:$(id -u):rwX" "$d"
-    done
-    info "ACLs aplicadas (UID 10000 + tu usuario, con herencia)"
-  else
-    warn "No hay setfacl (paquete 'acl'): se usa chmod a+rwX."
-    $FS_SUDO chmod -R a+rwX hermes/data hermes/home hermes/local-share
-  fi
 fi
 
 # hermes/data/.env se genera desde el .env de la raíz

@@ -150,6 +150,8 @@ services:
       - API_SERVER_HOST=0.0.0.0
       - API_SERVER_KEY=${API_SERVER_KEY}
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
+      - HERMES_UID=${HERMES_UID:-}
+      - HERMES_GID=${HERMES_GID:-}
       - TZ=${LAB_TIMEZONE:-America/Argentina/Buenos_Aires}
     volumes:
       - ./hermes/data:/opt/data

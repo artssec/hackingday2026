@@ -1,7 +1,7 @@
 # Del caos de logs al control total — Wazuh + Hermes
 
 Laboratorio de la charla **"Del caos de logs al control total"**, presentada en
-**Hacking Day 2026 (Paraná, Entre Ríos)**.
+[**Hacking Day 2026**](https://hackingday.com.ar/) (Paraná, Entre Ríos).
 
 La idea: Wazuh (SIEM) genera alertas de seguridad, y
 [Hermes](https://github.com/NousResearch/hermes-agent) (agente de IA) las lee

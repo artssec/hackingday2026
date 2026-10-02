@@ -1,0 +1,21 @@
+# Secretos y estado local
+.env
+# ...excepto el .env FALSO del sitio de ejemplo del target (se sirve a propósito)
+!target/web/.env
+hermes/data/
+hermes/home/
+hermes/local-share/
+
+# Copia local de wazuh-docker + config generada (incluye certificados y claves)
+wazuh-src/
+config/
+*.pem
+*.key
+
+# Basura de macOS / editores
+.vscode/
+.DS_Store
+*.swp
+__pycache__/
+
+TODO.md

@@ -1,0 +1,5 @@
+model:
+  default: minimax-m3
+  provider: opencode-go
+cron:
+  mirror_delivery: true

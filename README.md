@@ -13,6 +13,15 @@ investigando por vos.
 Todo corre en contenedores descartables, en tu propia máquina, y nada queda
 expuesto fuera de `127.0.0.1`.
 
+Las slides de la charla (Hacking Day 2026, 2 de octubre) están en
+[`Del_caos_al_control_total.pdf`](./Del_caos_al_control_total.pdf).
+
+¿Dudas, sugerencias o algo roto? Escribime:
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-devhugoavila-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/devhugoavila/)
+[![GitHub](https://img.shields.io/badge/GitHub-hugok2k-181717?logo=github&logoColor=white)](https://github.com/hugok2k)
+[![Web](https://img.shields.io/badge/Web-hugoavila.dev-000000?logo=googlechrome&logoColor=white)](https://www.hugoavila.dev/)
+
 > **Aviso:** el contenedor `wazuh-target` es vulnerable **a propósito** (SSH con
 > contraseña débil y un `/.env` servido por nginx, con credenciales falsas) y
 > `make demo` lo ataca con `nmap`, `hydra` y `nuclei`. Es solo para usar contra

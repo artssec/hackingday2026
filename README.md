@@ -90,13 +90,6 @@ sudo apt install git curl openssl perl acl nmap hydra
 sudo apt install docker-compose-v2 docker.io   # o Docker Engine desde docs.docker.com
 ```
 
-- `make setup` usa `sudo` para ajustar `vm.max_map_count` y los permisos de los
-  certificados y de `hermes/data`, así que te puede pedir la contraseña.
-- `vm.max_map_count` no persiste al reiniciar; el propio script te muestra
-  cómo dejarlo fijo.
-- El dashboard de Wazuh se publica en `127.0.0.1:443`: ese puerto tiene que
-  estar libre.
-
 ### Apple Silicon (M1/M2/M3/M4/M5)
 
 Desde Wazuh 4.14.7 las imágenes tienen build arm64 nativo, así que todo corre

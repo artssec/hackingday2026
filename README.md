@@ -88,7 +88,6 @@ target/                   contenedor atacable (sshd + nginx + agente de Wazuh)
 ```bash
 sudo apt install git curl openssl perl acl nmap hydra
 sudo apt install docker-compose-v2 docker.io   # o Docker Engine desde docs.docker.com
-sudo usermod -aG docker $USER && newgrp docker  # para usar docker sin sudo
 ```
 
 - `make setup` usa `sudo` para ajustar `vm.max_map_count` y los permisos de los

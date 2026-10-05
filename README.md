@@ -1,4 +1,4 @@
-# Del caos de logs al control total — Wazuh + Hermes
+# Del caos de logs al control total - Wazuh + Hermes
 
 Laboratorio de la charla **"Del caos de logs al control total"**, presentada en
 [**Hacking Day 2026**](https://hackingday.com.ar/) (Paraná, Entre Ríos).
@@ -6,7 +6,7 @@ Laboratorio de la charla **"Del caos de logs al control total"**, presentada en
 La idea: Wazuh (SIEM) genera alertas de seguridad, y
 [Hermes](https://github.com/NousResearch/hermes-agent) (agente de IA) las lee
 cada 15 minutos con **MiniMax M3** (vía OpenCode Go) y manda un resumen humano a
-**Telegram** — en vez de que alguien tenga que mirar el dashboard todo el día.
+**Telegram** - en vez de que alguien tenga que mirar el dashboard todo el día.
 Después podés contestarle en el chat ("¿de dónde viene esa IP?") y sigue
 investigando por vos.
 
@@ -49,21 +49,21 @@ Internet -----X (nada expuesto salvo 127.0.0.1)
 └────────────────────────────────────────────────────────────────────────────┘
 ```
 
-- **wazuh.manager / wazuh.indexer / wazuh.dashboard** — stack oficial de Wazuh
+- **wazuh.manager / wazuh.indexer / wazuh.dashboard** - stack oficial de Wazuh
   (single-node), instalado desde el repo `wazuh-docker` (no viene versionado
   acá: lo clona `setup.sh`, pineado a la versión de `.env`).
-- **wazuh-target** — Ubuntu con `sshd`, nginx y un agente de Wazuh, pensado
+- **wazuh-target** - Ubuntu con `sshd`, nginx y un agente de Wazuh, pensado
   para ser atacado. Usuario SSH `demo` / contraseña `demo123`, y un `/.env`
   expuesto (credenciales falsas) en el sitio de nginx, ambos a propósito.
   Los dos viven en el mismo contenedor (con el mismo agente) para que el
   escaneo web quede tan visible para Wazuh como el brute-force SSH -- si
   nginx viviera en otro contenedor sin agente, ese tráfico sería invisible
   para el SIEM.
-- **gateway-core** — Hermes, imagen oficial `nousresearch/hermes-agent`
+- **gateway-core** - Hermes, imagen oficial `nousresearch/hermes-agent`
   pineada por versión y digest. Corre un cron job en modo agente: un script
   consulta el indexer directo (no la API REST del manager) y filtra el ruido;
   Hermes interpreta lo que queda y manda el resumen a Telegram.
-- **docker-socket-proxy** — Hermes puede ejecutar código; en vez de darle el
+- **docker-socket-proxy** - Hermes puede ejecutar código; en vez de darle el
   socket de Docker del host directo, pasa por un proxy de solo lectura+creación
   acotada. Es la única razón por la que el socket aparece en este compose.
 
@@ -183,10 +183,10 @@ mirror necesita que ya hayas escrito al bot alguna vez (sesión abierta).
 | Wazuh dashboard | https://localhost | `admin` / `SecretPassword` |
 | Hermes dashboard | http://127.0.0.1:9119 | `admin` / (ver `.env`, `DASHBOARD_PASSWORD`) |
 | Target (SSH) | `ssh demo@127.0.0.1 -p 2222` | `demo` / `demo123` |
-| Target (sitio de ejemplo) | https://127.0.0.1:8443 (cert autofirmado) | — |
+| Target (sitio de ejemplo) | https://127.0.0.1:8443 (cert autofirmado) | - |
 
 Todas las credenciales son las de ejemplo del propio Wazuh o generadas random
-por `setup.sh` — quedan en tu `.env` local, que nunca se sube (ver `.gitignore`).
+por `setup.sh` - quedan en tu `.env` local, que nunca se sube (ver `.gitignore`).
 
 ## Decisiones de diseño
 
